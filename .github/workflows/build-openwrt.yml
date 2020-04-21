@@ -73,6 +73,8 @@ jobs:
       
     - name: 以前的package
       run:  |
+        cd openwrt
+        sudo chmod -R 777 /root/Lienol/
         echo -e "" >> /root/Lienol/feeds.conf.default
         echo -e "src-git oldlienol https://github.com/TinyTitanPro/lienol-openwrt-package" >> /root/Lienol/feeds.conf.default
         
