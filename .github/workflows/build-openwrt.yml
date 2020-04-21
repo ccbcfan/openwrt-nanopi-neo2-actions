@@ -62,8 +62,8 @@ jobs:
       run:  |
         #cd openwrt
         #sudo chmod -R 777 /openwrt
-        #echo -e "" >> ./feeds.conf.default
-        #echo -e "src-git oldlienol https://github.com/TinyTitanPro/lienol-openwrt-package" >> ./feeds.conf.default
+        #echo  "" >> ./feeds.conf.default
+        #echo  "src-git oldlienol https://github.com/TinyTitanPro/lienol-openwrt-package" >> ./feeds.conf.default
         cd openwrt/package && git clone https://github.com/kenzok8/openwrt-packages.git
         
     - name: Initialization environment
