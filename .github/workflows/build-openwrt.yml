@@ -17,6 +17,7 @@ on:
       - master
     paths:
       - '.config'
+#lede的源
 #  schedule:
 #    - cron: 0 9 * * 3
 #  watch:
@@ -66,7 +67,7 @@ jobs:
         #echo  "src-git oldlienol https://github.com/TinyTitanPro/lienol-openwrt-package" >> ./feeds.conf.default
         cd openwrt/package && git clone https://github.com/kenzok8/openwrt-packages.git
         
-    - name: Initialization environment
+    - name: Initialization environment初始化环境
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
@@ -80,13 +81,13 @@ jobs:
         curl -fsSL https://raw.githubusercontent.com/P3TERX/dotfiles/master/.bashrc >> ~/.bashrc
 
     
-    - name: Update feeds
+    - name: Update feeds更新feeds
       run: cd openwrt && ./scripts/feeds update -a
 
-    - name: Install feeds
+    - name: Install feeds安装feeds
       run: cd openwrt && ./scripts/feeds install -a
 
-    - name: Load custom configuration
+    - name: Load custom configuration 
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
@@ -98,7 +99,7 @@ jobs:
       uses: P3TERX/debugger-action@master
       if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
 
-    - name: Download package
+    - name: Download package下载包
       id: package
       run: |
         cd openwrt
@@ -107,7 +108,7 @@ jobs:
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
-    - name: Compile the firmware
+    - name: Compile the firmware编译
       id: compile
       run: |
         cd openwrt
